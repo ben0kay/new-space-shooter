@@ -8,7 +8,12 @@ public partial class ShipFlightController : Node
 
     // =========================================================
     // Clears steering inertia when the sandbox resets or pilot changes.
-    public void ResetFlight() { _pitchRate = _yawRate = 0; }
+    public void ResetFlight()
+    {
+        _pitchRate = _yawRate = 0;
+        if (!GodotObject.IsInstanceValid(Ship)) return;
+        Ship.PitchInput = Ship.YawInput = Ship.StrafeInput = Ship.RollInput = 0;
+    }
 
     // =========================================================
     // Applies buffered commands after the player controller has supplied them.
@@ -25,6 +30,7 @@ public partial class ShipFlightController : Node
             Ship.MoveAndSlide();
             return;
         }
+        Ship.StrafeInput = c.Strafe;
         float thrust = c.Boost ? 1f : c.Thrust;
         float speed = c.Boost ? s.ForwardSpeed * Mathf.Max(1, s.BoostSpeedMultiplier)
             : thrust >= 0 ? s.ForwardSpeed : s.ReverseSpeed;
@@ -50,6 +56,9 @@ public partial class ShipFlightController : Node
         float blend = 1f - Mathf.Exp(-Mathf.Max(0, s.SteeringResponse) * seconds);
         _pitchRate = Mathf.Lerp(_pitchRate, desiredPitch, blend);
         _yawRate = Mathf.Lerp(_yawRate, desiredYaw, blend);
+        Ship.PitchInput = pitchLimit > 0.0001f ? _pitchRate / pitchLimit : 0;
+        Ship.YawInput = yawLimit > 0.0001f ? _yawRate / yawLimit : 0;
+        Ship.RollInput = c.Roll;
         Ship.RotateObjectLocal(Vector3.Right, _pitchRate * seconds);
         Ship.RotateObjectLocal(Vector3.Up, _yawRate * seconds);
         Ship.RotateObjectLocal(Vector3.Forward, Mathf.DegToRad(c.Roll * s.RollSpeed) * seconds);

@@ -20,6 +20,7 @@ public partial class PlayerController : Node
             return;
         }
         Ship.Config = Config.Ship;
+        Ship.VisualConfig = Config.Visuals;
         if (Config.CaptureMouseOnStart) Input.MouseMode = Input.MouseModeEnum.Captured;
     }
 

@@ -76,6 +76,7 @@ public partial class FlightSandbox : Node3D
         Ship.GetNode<ShipFlightController>("Flight").ResetFlight();
         Controls.ClearControls();
         Ship.ResetPhysicsInterpolation();
+        Ship.ResetPresentation();
     }
 
     private bool _resetRequested;

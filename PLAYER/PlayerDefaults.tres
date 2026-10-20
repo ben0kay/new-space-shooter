@@ -1,8 +1,13 @@
-[gd_resource type="Resource" script_class="PlayerMasterConfig" load_steps=6 format=3]
+[gd_resource type="Resource" script_class="PlayerMasterConfig" load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://PLAYER/PlayerMasterConfig.cs" id="1"]
 [ext_resource type="Script" path="res://PLAYER/Ship/PlayerShipConfig.cs" id="2"]
 [ext_resource type="Script" path="res://PLAYER/Camera/PlayerCameraConfig.cs" id="3"]
+
+[ext_resource type="Script" path="res://PLAYER/Ship/Visuals/ShipVisualConfig.cs" id="4"]
+
+[sub_resource type="Resource" id="Visuals"]
+script = ExtResource("4")
 
 [sub_resource type="Resource" id="Ship"]
 script = ExtResource("2")
@@ -14,3 +19,4 @@ script = ExtResource("3")
 script = ExtResource("1")
 Ship = SubResource("Ship")
 Camera = SubResource("Camera")
+Visuals = SubResource("Visuals")
