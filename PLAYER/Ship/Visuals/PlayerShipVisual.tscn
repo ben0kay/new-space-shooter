@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://PLAYER/Ship/Visuals/Models/Cyan_Interceptor_Mk2.glb" id="1"]
+
+[node name="PlayerShipVisual" type="Node3D"]
+
+[node name="CyanInterceptor" parent="." instance=ExtResource("1")]
+scale = Vector3(0.4, 0.4, 0.4)
