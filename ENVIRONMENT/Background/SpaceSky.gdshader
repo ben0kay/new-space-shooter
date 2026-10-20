@@ -1,7 +1,7 @@
 shader_type sky;
 render_mode disable_fog;
 
-// Composes independent stars and a full-surround sky colour backdrop.
+// Composes independent stars, the full-surround colour backdrop and one localized nebula.
 // Background only: physical sunlight belongs to Lighting; no ship or camera dependencies.
 
 uniform float star_brightness = 0.9;
@@ -14,6 +14,7 @@ uniform vec3 backdrop_direction = vec3(-0.25, 0.18, -1.0);
 
 #include "res://ENVIRONMENT/Background/SkyBackdrop/SkyBackdrop.gdshaderinc"
 #include "res://ENVIRONMENT/Background/Stars/StarField.gdshaderinc"
+#include "res://ENVIRONMENT/Background/Nebulae/LocalizedNebula.gdshaderinc"
 
 // =========================================================
 // Composes an infinite backdrop without horizon, sun-disc or nearby geometry.
@@ -55,5 +56,14 @@ void sky()
 		+ backdrop
 		+ stars * star_brightness * star_attenuation;
 
-	COLOR = background;
+    vec2 formation = nebula_density(direction);
+    vec3 extra_stars = vec3(0.0);
+    if (formation.y > 0.0 && nebula_extra_star_density > 0.0)
+    {
+        extra_stars = star_layer_with_occupancy(
+            coordinates, face, 210.0, 151.0 + nebula_seed,
+            clamp(nebula_extra_star_density, 0.0, 1.0) * 0.25)
+            * formation.y * max(0.0, nebula_extra_star_brightness);
+    }
+    COLOR = background + nebula_emission(formation) + extra_stars;
 }

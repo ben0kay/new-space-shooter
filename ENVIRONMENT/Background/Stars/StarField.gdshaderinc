@@ -11,12 +11,12 @@ vec3 star_random(vec2 cell, float seed)
 
 // =========================================================
 // Draws one sparse layer of distant stars.
-vec3 star_layer(vec2 coordinates, float face, float density, float seed)
+vec3 star_layer_with_occupancy(vec2 coordinates, float face, float density, float seed, float occupancy)
 {
 	vec2 grid = coordinates * density;
 	vec3 random = star_random(floor(grid), seed + face * 37.0);
 
-	if (random.z > 0.025)
+	if (random.z > clamp(occupancy, 0.0, 1.0))
 		return vec3(0.0);
 
 	float distance_to_star = length(
@@ -33,3 +33,10 @@ vec3 star_layer(vec2 coordinates, float face, float density, float seed)
 	return tint * star * mix(0.3, 1.0, random.y);
 }
 
+
+// =========================================================
+// Preserves the original general star field independently of nebula density.
+vec3 star_layer(vec2 coordinates, float face, float density, float seed)
+{
+    return star_layer_with_occupancy(coordinates, face, density, seed, 0.025);
+}

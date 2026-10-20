@@ -5,7 +5,7 @@
 ## Current implementation
 - SpaceEnvironment.tscn composes Lighting/SpaceLighting.tscn and Rendering/SpaceRendering.tscn.
 - Rendering owns the only WorldEnvironment; Background/SpaceBackground.tres supplies its sky.
-- Background/SpaceSky.gdshader composes SkyBackdrop/SkyBackdrop.gdshaderinc and Stars/StarField.gdshaderinc. Nebulae/ is reserved; none are implemented.
+- Background/SpaceSky.gdshader composes SkyBackdrop/SkyBackdrop.gdshaderinc and Stars/StarField.gdshaderinc. Nebulae/LocalizedNebula.gdshaderinc adds one bounded organic blue/cyan/pale formation and extra local stars.
 - Presets/DarkBlueSkyBackdrop.tres is the sky ShaderMaterial preset: edit independent star brightness and backdrop base colour, variation tint/strength/direction in Inspector. See Background/SkyBackdrop/README.md for per-sector scene overrides.
 - No ship dependencies, per-frame environment scripts, asteroids, local fog/clouds, or visible sun/planet in this pass. The existing warm physical sunlight is retained.
 - This is a native scene/resource composition; config/controller scripts will be added when runtime changes warrant them.
@@ -44,7 +44,7 @@ ENVIRONMENT/
 │   ├── BackgroundConfig.cs             [planned]
 │   ├── SkyBackdrop/                    [implemented: 360-degree colour variation]
 │   ├── Stars/
-│   ├── Nebulae/
+│   ├── Nebulae/                        [implemented: localized formation]
 │   ├── Planets/
 │   └── README.md
 ├── Atmosphere/
@@ -67,7 +67,7 @@ ENVIRONMENT/
 ## System boundaries
 1. **One owner of the `WorldEnvironment` resource.** Rendering creates/owns it. The controller coordinates requests from lighting, sky and haze without conflicting overwrites.
 2. **One source of truth for sun direction/color.** A `DirectionalLight3D` illuminates real objects, while the sky sun disc and lens flare are synchronized **visuals**, not separate physical light sources.
-3. **Sky backdrop, nebulae and local clouds have separate ownership.** Full-surround wispy colour belongs in Background/SkyBackdrop/. Smaller brighter distant nebula features are reserved under Background/Nebulae/. Nearby spatial clouds belong in Atmosphere/Clouds/.
+3. **Sky backdrop, nebulae and local clouds have separate ownership.** Full-surround wispy colour belongs in Background/SkyBackdrop/. Smaller brighter distant nebula features belong under Background/Nebulae/; one localized formation is implemented. Nearby spatial clouds belong in Atmosphere/Clouds/.
 4. **Visual dust is not gameplay debris.** Camera-relative/space-travel dust belongs here; collision debris, explosions and weapon effects belong with their future gameplay/visual effects systems.
 5. **No ship-specific assumptions in reusable environment modules.** Get the active camera or an explicitly supplied observer instead of requiring a `PlayerShip` parent.
 6. **Configs hold settings; controllers coordinate; shaders render.** Avoid putting unrelated features into a single large script.

@@ -9,4 +9,4 @@ Inspector > Shader Parameters:
 - backdrop_color: muted blue tint, freely replaceable with other colours.
 - backdrop_direction: strongest variation direction.
 
-This configures sky backdrop colours plus independently composed stars. It contains no nebula feature. Sector scenes can use their own duplicated Sky/material resources; see Background/SkyBackdrop/README.md. Full lighting/atmosphere sector presets remain future work.
+This configures sky backdrop colours plus independently composed stars. The independent Nebula parameter group adds one localized formation; its direction, angular size, seed, colours, brightness and extra star density can vary per sector. Existing backdrop values remain unchanged. See Background/Nebulae/README.md for all controls. Sector scenes can use their own duplicated Sky/material resources; see Background/SkyBackdrop/README.md. Full lighting/atmosphere sector presets remain future work.
