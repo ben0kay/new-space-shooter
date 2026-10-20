@@ -1,10 +1,12 @@
 # Presets
 
-DarkBlueSpace.tres is an implemented ShaderMaterial preset for the procedural space sky. Select it in Inspector and expand Shader Parameters:
-- star_brightness: star intensity (default 1.15).
-- nebula_strength: cloud intensity (default 0.85).
-- background_color: near-black blue baseline.
-- nebula_color: dark blue cloud tint.
-- nebula_direction: strongest formation direction; use a nonzero vector.
+DarkBlueSkyBackdrop.tres is the default sky material preset. It replaces DarkBlueSpace.tres and renames the old nebula parameters to backdrop parameters.
 
-Background/SpaceBackground.tres references it. This material is shared by scenes that reference that sky; duplicate both resources for an independent look. It is a background-only preset, not yet a full sector lighting/rendering/atmosphere config. Planned DeepSpace/MiningBelt/NebulaRegion presets and runtime orchestration remain future work.
+Inspector > Shader Parameters:
+- star_brightness: 1.15; unchanged.
+- background_color: nearly black base.
+- backdrop_strength: 0.18; substantially darker than the previous 0.85.
+- backdrop_color: muted blue tint, freely replaceable with other colours.
+- backdrop_direction: strongest variation direction.
+
+This configures sky backdrop colours plus independently composed stars. It contains no nebula feature. Sector scenes can use their own duplicated Sky/material resources; see Background/SkyBackdrop/README.md. Full lighting/atmosphere sector presets remain future work.

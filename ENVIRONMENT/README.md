@@ -1,12 +1,12 @@
 # ENVIRONMENT — Space Visual Systems
 
-**Status: initial reusable space environment implemented.** FlightSandbox instances SpaceEnvironment.tscn with a procedural star/blue-nebula background, one rendering owner and separate sunlight. Atmosphere, visible sun/lens flare, planets, runtime controllers and full sector presets remain planned.
+**Status: initial reusable space environment implemented.** FlightSandbox instances SpaceEnvironment.tscn with a procedural star field and dark sky backdrop, one rendering owner and separate sunlight. Atmosphere, visible sun/lens flare, planets, runtime controllers and full sector presets remain planned.
 
 ## Current implementation
 - SpaceEnvironment.tscn composes Lighting/SpaceLighting.tscn and Rendering/SpaceRendering.tscn.
 - Rendering owns the only WorldEnvironment; Background/SpaceBackground.tres supplies its sky.
-- Background/SpaceSky.gdshader reuses the old project's star and nebula algorithms only.
-- Presets/DarkBlueSpace.tres is a sky ShaderMaterial preset: edit star brightness, nebula strength, background/nebula colours and nebula direction in Inspector.
+- Background/SpaceSky.gdshader composes SkyBackdrop/SkyBackdrop.gdshaderinc and Stars/StarField.gdshaderinc. Nebulae/ is reserved; none are implemented.
+- Presets/DarkBlueSkyBackdrop.tres is the sky ShaderMaterial preset: edit independent star brightness and backdrop base colour, variation tint/strength/direction in Inspector. See Background/SkyBackdrop/README.md for per-sector scene overrides.
 - No ship dependencies, per-frame environment scripts, asteroids, local fog/clouds, or visible sun/planet in this pass. The existing warm physical sunlight is retained.
 - This is a native scene/resource composition; config/controller scripts will be added when runtime changes warrant them.
 
@@ -42,6 +42,7 @@ ENVIRONMENT/
 │   ├── SpaceSky.gdshader                [implemented]
 │   ├── SpaceBackground.cs              [planned]
 │   ├── BackgroundConfig.cs             [planned]
+│   ├── SkyBackdrop/                    [implemented: 360-degree colour variation]
 │   ├── Stars/
 │   ├── Nebulae/
 │   ├── Planets/
@@ -61,12 +62,12 @@ ENVIRONMENT/
 └── README.md
 ```
 
-**Outside this folder, planned later:** `TESTING/EnvironmentTest/EnvironmentTest.tscn` and its README. The test scene is not being implemented in this structure-only pass.
+**Current test scene:** TESTING/FlightSandbox/FlightSandbox.tscn. A dedicated EnvironmentTest scene remains planned.
 
 ## System boundaries
 1. **One owner of the `WorldEnvironment` resource.** Rendering creates/owns it. The controller coordinates requests from lighting, sky and haze without conflicting overwrites.
 2. **One source of truth for sun direction/color.** A `DirectionalLight3D` illuminates real objects, while the sky sun disc and lens flare are synchronized **visuals**, not separate physical light sources.
-3. **Background nebulae are not local cloud volumes.** Sky imagery belongs in `Background/`; floating spatial clouds belong in `Atmosphere/Clouds/`.
+3. **Sky backdrop, nebulae and local clouds have separate ownership.** Full-surround wispy colour belongs in Background/SkyBackdrop/. Smaller brighter distant nebula features are reserved under Background/Nebulae/. Nearby spatial clouds belong in Atmosphere/Clouds/.
 4. **Visual dust is not gameplay debris.** Camera-relative/space-travel dust belongs here; collision debris, explosions and weapon effects belong with their future gameplay/visual effects systems.
 5. **No ship-specific assumptions in reusable environment modules.** Get the active camera or an explicitly supplied observer instead of requiring a `PlayerShip` parent.
 6. **Configs hold settings; controllers coordinate; shaders render.** Avoid putting unrelated features into a single large script.

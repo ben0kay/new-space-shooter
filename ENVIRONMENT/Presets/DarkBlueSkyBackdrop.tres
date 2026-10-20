@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://ENVIRONMENT/Background/SpaceSky.gdshader" id="1"]
+
+[resource]
+shader = ExtResource("1")
+shader_parameter/star_brightness = 1.15
+shader_parameter/backdrop_strength = 0.18
+shader_parameter/background_color = Color(0.0005, 0.001, 0.003, 1)
+shader_parameter/backdrop_color = Color(0.10, 0.20, 0.40, 1)
+shader_parameter/backdrop_direction = Vector3(-0.25, 0.18, -1)

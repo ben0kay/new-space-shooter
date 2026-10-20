@@ -18,6 +18,8 @@ Latest camera/visual response update: source and scene wiring reviewed; compilat
 
 ## Modular space backdrop
 
-FlightSandbox now instances ENVIRONMENT/SpaceEnvironment.tscn: procedural stars and dark blue nebulae adapted from the old prototype, separate physical sunlight and one rendering owner. The test grid and distance markers remain; rocks have been removed. Edit ENVIRONMENT/Presets/DarkBlueSpace.tres in Inspector for sky appearance. See ENVIRONMENT/README.md for implemented/planned boundaries.
+FlightSandbox now instances ENVIRONMENT/SpaceEnvironment.tscn: procedural stars and a dark blue sky backdrop adapted from the old prototype, separate physical sunlight and one rendering owner. The test grid and distance markers remain; rocks have been removed. Edit ENVIRONMENT/Presets/DarkBlueSkyBackdrop.tres in Inspector for sky appearance. See ENVIRONMENT/README.md for implemented/planned boundaries.
 
 This backdrop update was source/resource checked only; no usable environment was available for shader compilation or visual runtime verification.
+
+Sky colour classification: full-surround wispy colour now belongs to ENVIRONMENT/Background/SkyBackdrop/. Nebulae/ is reserved for future localized features. The default backdrop is substantially darker; stars retain their previous brightness. Per-sector resource override instructions are in Background/SkyBackdrop/README.md. This update was source/resource checked; visual runtime verification was unavailable.

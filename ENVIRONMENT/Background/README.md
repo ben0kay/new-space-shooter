@@ -1,12 +1,14 @@
 # Background
 
-Infinite procedural space backdrop, independent of the ship, grid and physical lighting.
+Distant sky presentation, independent of ship movement and physical lighting.
 
-Implemented:
-- SpaceSky.gdshader: two sparse star layers and broad, dark blue nebula formations adapted from the previous Godot prototype.
-- SpaceBackground.tres: Sky resource using Presets/DarkBlueSpace.tres as its ShaderMaterial.
-- Rendering/SpaceRendering.tscn consumes this sky; Background does not create another WorldEnvironment.
+- SkyBackdrop/: full-surround background colours and subtle wispy variation.
+- Stars/: independent procedural star layers.
+- Nebulae/: reserved for future smaller, brighter localized nebula features; currently empty apart from documentation.
+- Planets/: planned.
+- SpaceSky.gdshader: composes the implemented backdrop and star shader includes.
+- SpaceBackground.tres: Sky resource referencing Presets/DarkBlueSkyBackdrop.tres.
 
-Select ENVIRONMENT/Presets/DarkBlueSpace.tres in Inspector and expand Shader Parameters to adjust star_brightness, nebula_strength, background_color, nebula_color and nebula_direction. Keep direction nonzero. No horizon or spatial edge: the backdrop surrounds the camera at any world position.
+Edit the material preset in Inspector > Shader Parameters. background_color is the base, backdrop_color/strength/direction control the variation, and star_brightness controls stars. No nebula settings remain in the implemented shader.
 
-The old shader's visible sun and planet were intentionally excluded from this stars/nebula pass. Stars/ and Nebulae/ document the shared shader features; Planets/ remains planned. No local cloud volumes or gameplay geometry.
+See SkyBackdrop/README.md for independent per-sector resource overrides. Rendering remains the only WorldEnvironment owner.

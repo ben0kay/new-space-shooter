@@ -1,6 +1,6 @@
 [gd_resource type="Sky" load_steps=2 format=3]
 
-[ext_resource type="Material" path="res://ENVIRONMENT/Presets/DarkBlueSpace.tres" id="1"]
+[ext_resource type="Material" path="res://ENVIRONMENT/Presets/DarkBlueSkyBackdrop.tres" id="1"]
 
 [resource]
 sky_material = ExtResource("1")

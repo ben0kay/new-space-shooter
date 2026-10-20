@@ -1,3 +1,5 @@
 # Nebulae
 
-Implemented as broad procedural sky formations in ../SpaceSky.gdshader, adapted from the old project. Dark blue backdrop only, without local volume or collision. Tune nebula_strength, nebula_color and nebula_direction in ENVIRONMENT/Presets/DarkBlueSpace.tres.
+Reserved only. No nebula shaders, resources or effects are implemented here.
+
+Future nebulae will be smaller, brighter, localized distant features with their own colour and placement. The existing full-surround wispy colour variation belongs to ../SkyBackdrop/ and must not be classified as nebulae.
