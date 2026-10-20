@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://TESTING/FlightSandbox/FlightSandbox.cs" id="1"]
 [ext_resource type="PackedScene" path="res://PLAYER/Ship/PlayerShip.tscn" id="2"]
@@ -7,23 +7,7 @@
 [ext_resource type="Script" path="res://PLAYER/Camera/PlayerCameraController.cs" id="5"]
 [ext_resource type="Resource" path="res://PLAYER/PlayerDefaults.tres" id="6"]
 
-[sub_resource type="ProceduralSkyMaterial" id="SkyMaterial"]
-sky_top_color = Color(0.002, 0.004, 0.012, 1)
-sky_horizon_color = Color(0.025, 0.04, 0.07, 1)
-ground_bottom_color = Color(0.002, 0.004, 0.012, 1)
-ground_horizon_color = Color(0.025, 0.04, 0.07, 1)
-
-[sub_resource type="Sky" id="Sky"]
-sky_material = SubResource("SkyMaterial")
-
-[sub_resource type="Environment" id="Environment"]
-background_mode = 2
-sky = SubResource("Sky")
-ambient_light_source = 3
-ambient_light_color = Color(0.32, 0.4, 0.55, 1)
-ambient_light_energy = 0.45
-tonemap_mode = 2
-glow_enabled = true
+[ext_resource type="PackedScene" path="res://ENVIRONMENT/SpaceEnvironment.tscn" id="7"]
 
 [node name="FlightSandbox" type="Node3D" node_paths=PackedStringArray("Ship", "Controls")]
 script = ExtResource("1")
@@ -31,17 +15,7 @@ Ship = NodePath("PlayerShip")
 Controls = NodePath("Player/Input")
 process_physics_priority = -30
 
-[node name="Environment" type="Node3D" parent="."]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
-environment = SubResource("Environment")
-
-[node name="Sun" type="DirectionalLight3D" parent="Environment"]
-rotation_degrees = Vector3(-30, -40, 0)
-light_color = Color(1, 0.91, 0.76, 1)
-light_energy = 1.8
-shadow_enabled = true
-directional_shadow_max_distance = 450.0
+[node name="Environment" parent="." instance=ExtResource("7")]
 
 [node name="TestGeometry" type="Node3D" parent="."]
 

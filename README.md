@@ -15,3 +15,9 @@ Tune PLAYER/PlayerDefaults.tres for ship/camera settings; key bindings are on Pl
 C# sources compiled successfully against GodotSharp 4.7.2 using Roslyn. Resource references and original model integrity checked; Godot headless imported the GLB successfully. Full SDK build/startup was blocked by the local .NET process-information failure, so interactive flight/camera validation remains to be done in the Godot .NET editor.
 
 Latest camera/visual response update: source and scene wiring reviewed; compilation/runtime testing was unavailable because no execution environment was available for this pass.
+
+## Modular space backdrop
+
+FlightSandbox now instances ENVIRONMENT/SpaceEnvironment.tscn: procedural stars and dark blue nebulae adapted from the old prototype, separate physical sunlight and one rendering owner. The test grid and distance markers remain; rocks have been removed. Edit ENVIRONMENT/Presets/DarkBlueSpace.tres in Inspector for sky appearance. See ENVIRONMENT/README.md for implemented/planned boundaries.
+
+This backdrop update was source/resource checked only; no usable environment was available for shader compilation or visual runtime verification.

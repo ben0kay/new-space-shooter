@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://ENVIRONMENT/Rendering/SpaceRendering.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://ENVIRONMENT/Lighting/SpaceLighting.tscn" id="2"]
+
+[node name="SpaceEnvironment" type="Node3D"]
+
+[node name="Rendering" parent="." instance=ExtResource("1")]
+
+[node name="Lighting" parent="." instance=ExtResource("2")]

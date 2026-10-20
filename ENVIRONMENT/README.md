@@ -1,6 +1,14 @@
 # ENVIRONMENT — Space Visual Systems
 
-**Status: folder/documentation scaffold only. No lighting, shaders, scenes, or runtime scripts have been migrated or implemented yet.**
+**Status: initial reusable space environment implemented.** FlightSandbox instances SpaceEnvironment.tscn with a procedural star/blue-nebula background, one rendering owner and separate sunlight. Atmosphere, visible sun/lens flare, planets, runtime controllers and full sector presets remain planned.
+
+## Current implementation
+- SpaceEnvironment.tscn composes Lighting/SpaceLighting.tscn and Rendering/SpaceRendering.tscn.
+- Rendering owns the only WorldEnvironment; Background/SpaceBackground.tres supplies its sky.
+- Background/SpaceSky.gdshader reuses the old project's star and nebula algorithms only.
+- Presets/DarkBlueSpace.tres is a sky ShaderMaterial preset: edit star brightness, nebula strength, background/nebula colours and nebula direction in Inspector.
+- No ship dependencies, per-frame environment scripts, asteroids, local fog/clouds, or visible sun/planet in this pass. The existing warm physical sunlight is retained.
+- This is a native scene/resource composition; config/controller scripts will be added when runtime changes warrant them.
 
 ## Purpose
 Own the **general appearance of outer space**: the light that illuminates spacecraft and rocks, the rendering/post-processing pipeline, distant scenery and nearby atmospheric visual details.
@@ -18,7 +26,7 @@ Keep ownership explicit:
 ENVIRONMENT/
 ├── Lighting/
 │   ├── SpaceLighting.cs                 [planned]
-│   ├── SpaceLighting.tscn               [planned]
+│   ├── SpaceLighting.tscn               [implemented]
 │   ├── LightingConfig.cs                [planned]
 │   ├── Sun/
 │   │   ├── SunLight.cs                  [planned]
@@ -27,11 +35,11 @@ ENVIRONMENT/
 │   └── README.md
 ├── Rendering/
 │   ├── SpaceRendering.cs               [planned]
-│   ├── SpaceRendering.tscn             [planned]
+│   ├── SpaceRendering.tscn             [implemented]
 │   ├── RenderingConfig.cs              [planned]
 │   └── README.md
 ├── Background/
-│   ├── SpaceSky.gdshader                [planned]
+│   ├── SpaceSky.gdshader                [implemented]
 │   ├── SpaceBackground.cs              [planned]
 │   ├── BackgroundConfig.cs             [planned]
 │   ├── Stars/
@@ -49,7 +57,7 @@ ENVIRONMENT/
 │   └── NebulaRegion.tres                [planned]
 ├── EnvironmentController.cs            [planned]
 ├── EnvironmentMasterConfig.cs          [planned]
-├── SpaceEnvironment.tscn               [planned]
+├── SpaceEnvironment.tscn               [implemented]
 └── README.md
 ```
 

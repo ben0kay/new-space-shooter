@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Sky" path="res://ENVIRONMENT/Background/SpaceBackground.tres" id="1"]
+
+[sub_resource type="Environment" id="Environment"]
+background_mode = 2
+sky = ExtResource("1")
+ambient_light_source = 3
+ambient_light_color = Color(0.32, 0.4, 0.55, 1)
+ambient_light_energy = 0.45
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="SpaceRendering" type="WorldEnvironment"]
+environment = SubResource("Environment")

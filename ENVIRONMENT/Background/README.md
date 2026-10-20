@@ -1,15 +1,12 @@
 # Background
 
-**Role:** Distant/infinite sky imagery — the view behind physical game objects.
+Infinite procedural space backdrop, independent of the ship, grid and physical lighting.
 
-## Planned
-- `SpaceBackground.cs`: manages sky presentation and sector-specific backdrop settings.
-- `BackgroundConfig.cs`: star/nebula/planet and visible-sun appearance options.
-- `SpaceSky.gdshader`: starting shader for space background.
-- `Stars/`: far star field / points.
-- `Nebulae/`: distant nebula formations and sky colour.
-- `Planets/`: distant planetary discs/silhouettes and their appearance.
+Implemented:
+- SpaceSky.gdshader: two sparse star layers and broad, dark blue nebula formations adapted from the previous Godot prototype.
+- SpaceBackground.tres: Sky resource using Presets/DarkBlueSpace.tres as its ShaderMaterial.
+- Rendering/SpaceRendering.tscn consumes this sky; Background does not create another WorldEnvironment.
 
-These are visual backdrop elements, *not* mineable spatial asteroids or close-up volumetric clouds. Planet geometry that becomes interactable would be managed elsewhere.
+Select ENVIRONMENT/Presets/DarkBlueSpace.tres in Inspector and expand Shader Parameters to adjust star_brightness, nebula_strength, background_color, nebula_color and nebula_direction. Keep direction nonzero. No horizon or spatial edge: the backdrop surrounds the camera at any world position.
 
-**Old reference:** `SpaceSky.gdshader`; star, nebula, sun-disc and planet code currently combined.
+The old shader's visible sun and planet were intentionally excluded from this stars/nebula pass. Stars/ and Nebulae/ document the shared shader features; Planets/ remains planned. No local cloud volumes or gameplay geometry.

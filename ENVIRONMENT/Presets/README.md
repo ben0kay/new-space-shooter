@@ -1,10 +1,10 @@
 # Presets
 
-**Role:** Named, reusable looks for different kinds of regions.
+DarkBlueSpace.tres is an implemented ShaderMaterial preset for the procedural space sky. Select it in Inspector and expand Shader Parameters:
+- star_brightness: star intensity (default 1.15).
+- nebula_strength: cloud intensity (default 0.85).
+- background_color: near-black blue baseline.
+- nebula_color: dark blue cloud tint.
+- nebula_direction: strongest formation direction; use a nonzero vector.
 
-## Planned presets
-- `DeepSpace.tres` — very dark, sparse atmosphere, controlled star and sun visibility.
-- `MiningBelt.tres` — visible rock silhouettes, clear lighting and restrained dust/haze.
-- `NebulaRegion.tres` — coloured sky nebulae and selectively richer cloud/haze presentation.
-
-These are **future Godot resources**, not functional files yet. A preset should set parameters through the environment controller, rather than duplicate scripts or override another module's entire environment resource.
+Background/SpaceBackground.tres references it. This material is shared by scenes that reference that sky; duplicate both resources for an independent look. It is a background-only preset, not yet a full sector lighting/rendering/atmosphere config. Planned DeepSpace/MiningBelt/NebulaRegion presets and runtime orchestration remain future work.

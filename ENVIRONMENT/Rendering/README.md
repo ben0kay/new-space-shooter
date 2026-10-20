@@ -1,12 +1,7 @@
 # Rendering
 
-**Role:** Global scene-render appearance and the **single owner** of `WorldEnvironment`.
+SpaceRendering.tscn owns the single WorldEnvironment used by SpaceEnvironment.tscn. Its Environment references Background/SpaceBackground.tres and owns ambient illumination, tonemapping and glow.
 
-## Planned
-- `SpaceRendering.cs`: manages/updates one Godot Environment resource.
-- `SpaceRendering.tscn`: reusable scene containing `WorldEnvironment` as needed.
-- `RenderingConfig.cs`: exposure, tonemapping, glow, ambient/reflected lighting, color and global post-process configuration.
+Edit the Environment resource in this scene for ambient colour/energy and post-processing. The sky is visual background, while ambient illumination is deliberately authored separately so nebula brightness does not unexpectedly relight the ship.
 
-Other modules provide environment inputs (sky resource from Background, haze parameters from Atmosphere, sun information from Lighting); they should not independently replace the complete `WorldEnvironment` resource.
-
-**Old reference:** Rendering and ambient setup currently mixed into `SpaceEnvironment.cs`.
+No runtime configuration scripts yet. Avoid adding a second WorldEnvironment to sandbox scenes.

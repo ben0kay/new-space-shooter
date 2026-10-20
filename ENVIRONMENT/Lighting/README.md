@@ -1,15 +1,5 @@
 # Lighting
 
-**Role:** Illumination of real geometry, shadows and the directional sun.
+SpaceLighting.tscn owns the physical DirectionalLight3D that lights the ship/grid, including shadows. It preserves the sandbox's existing direction, warm colour and energy.
 
-## Planned files
-- `SpaceLighting.cs` — coordinates physical light nodes and updates.
-- `SpaceLighting.tscn` — reusable lighting scene.
-- `LightingConfig.cs` — tweakable sunlight, shadow and lighting settings.
-- `Sun/SunLight.cs` — controls sun `DirectionalLight3D` (intensity, direction, color, shadows).
-- `Sun/SunLensFlare.cs` — projected screen flare, visibility/occlusion and fading.
-- `Sun/SunLensFlare.gdshader` — actual visual flare presentation.
-
-**Boundary:** Light hitting the hull and casting shadows belongs here. Global exposure/glow belongs to Rendering; the drawn solar disc in the sky belongs to Background. All should receive the same sun direction and color from the coordinated environment settings.
-
-**Old reference:** `SpaceEnvironment.cs`, `SunLensFlare.cs`, `SunLensFlare.gdshader`.
+Edit its Sun node in Inspector to change illumination. Background stars/nebulae live separately under Background. Visible sun disc and lens flare remain planned under Sun/; when introduced, they must share this physical sun's direction.

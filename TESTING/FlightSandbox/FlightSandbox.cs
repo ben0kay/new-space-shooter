@@ -20,23 +20,6 @@ public partial class FlightSandbox : Node3D
             AddBox(geometry, new Vector3(i * 20, -8, -150), new Vector3(0.12f, 0.12f, 400), gridMaterial);
             AddBox(geometry, new Vector3(0, -8, i * 20 - 150), new Vector3(400, 0.12f, 0.12f), gridMaterial);
         }
-        Node3D obstacles = new() { Name = "Obstacles" };
-        geometry.AddChild(obstacles);
-        StandardMaterial3D rock = new() { AlbedoColor = new Color(0.36f, 0.32f, 0.27f), Roughness = 0.9f };
-        for (int i = 0; i < 14; i++)
-        {
-            float size = 4 + i % 4 * 2;
-            Vector3 position = new((i % 2 == 0 ? -1 : 1) * (18 + i % 3 * 9), i % 3 * 7 - 2, -35 - i * 24);
-            MeshInstance3D visual = new()
-            {
-                Mesh = new SphereMesh { Radius = size, Height = size * 2, RadialSegments = 12, Rings = 6 },
-                MaterialOverride = rock, Scale = new Vector3(1, 0.7f, 1.2f)
-            };
-            StaticBody3D body = new() { Position = position, Name = $"Rock_{i:00}" };
-            obstacles.AddChild(body);
-            body.AddChild(visual);
-            body.AddChild(new CollisionShape3D { Shape = new SphereShape3D { Radius = size * 1.2f } });
-        }
         for (int i = 1; i <= 5; i++)
         {
             Label3D marker = new() { Text = $"{i * 50} m", Position = new Vector3(0, 8, -i * 50), FontSize = 64, PixelSize = 0.02f };

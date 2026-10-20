@@ -1,3 +1,3 @@
 # Stars
 
-Distant background star field visuals: density, colour, brightness, variation and potential twinkle. Prefer sky-rendered or cheap instanced representations. No physical lights per star. Planned only.
+Implemented as two procedural sparse star layers in ../SpaceSky.gdshader. No star nodes or per-star updates. Adjust star_brightness through ENVIRONMENT/Presets/DarkBlueSpace.tres.

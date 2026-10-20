@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[node name="SpaceLighting" type="Node3D"]
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-30, -40, 0)
+light_color = Color(1, 0.91, 0.76, 1)
+light_energy = 1.8
+shadow_enabled = true
+directional_shadow_max_distance = 450.0
